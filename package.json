@@ -5,10 +5,10 @@
   "author": "lee715 <344958185@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "cp ./src/env/dev.js ./src/env/index.js && webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js",
+    "build": "cp ./src/env/build.js ./src/env/index.js && node build/build.js",
     "pro": "node server/app.js"
   },
   "dependencies": {

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import config from '../env/dev'
+import config from '@/env'
 
 export default {
   data () {
@@ -23,7 +23,7 @@ export default {
   },
   props: ['uid', 'qrVisible'],
   mounted: function () {
-    this.url = `${config.apiUrl}/api/ticket?uid=${this.uid}`
+    this.url = `${config.apiUrl}/wx/ticket?uid=${this.uid}`
   }
 }
 </script>

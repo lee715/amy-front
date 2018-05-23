@@ -1,5 +1,5 @@
 /* global fetch XMLHttpRequest ActiveXObject */
-import config from '../env/dev'
+import config from '@/env'
 
 export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
   type = type.toUpperCase()

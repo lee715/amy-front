@@ -2,7 +2,7 @@
   <el-dialog
     title="创建价格梯度"
     :visible.sync="dialogVisible"
-    width="30%"
+    width="600px"
     :before-close="handleClose">
     <el-form :model="ruleFormGradCreate" status-icon ref="ruleFormGradCreate" label-width="100px">
       <el-form-item label="名字" prop="name">
@@ -16,11 +16,11 @@
         <el-col :span="8">
           <el-input v-model="grad.price"></el-input>
         </el-col>
-        <el-col :span="4" class="el-col-center">测试</el-col>
+        <el-col :span="4" class="el-col-center">块钱</el-col>
         <el-col :span="8">
           <el-input v-model="grad.time"></el-input>
         </el-col>
-        <el-col :span="4" class="el-col-center">测试</el-col>
+        <el-col :span="4" class="el-col-center">分钟</el-col>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleFormGradCreate')">提交</el-button>

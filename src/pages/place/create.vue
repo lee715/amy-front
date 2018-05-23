@@ -66,6 +66,16 @@
       <el-form-item label="分成数额" prop="agentCount">
         <el-input-number v-model="PlaceCreateForm.agentCount" :min="0" :max="100" label="经销商分成数额"></el-input-number>
       </el-form-item>
+      <el-form-item label="价格" prop="_gradId">
+        <el-select v-model="PlaceCreateForm._gradId" placeholder="请选择">
+          <el-option
+            v-for="grad in PlaceCreateForm.grads"
+            :key="grad.id"
+            :label="grad.name"
+            :value="grad.id">
+          </el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('PlaceCreateForm')">提交</el-button>
         <el-button @click="resetForm('PlaceCreateForm')">重置</el-button>
@@ -85,6 +95,7 @@
 import { regionData, CodeToText } from 'element-china-area-data'
 import {getModes, create} from '@/models/place'
 import {getSalesmans, getAgents} from '@/models/user'
+import {getAll} from '@/models/grad'
 // import {create} from '@/models/place'
 
 export default {
@@ -107,7 +118,8 @@ export default {
         salesmans: [],
         province: '',
         city: '',
-        district: ''
+        district: '',
+        _gradId: ''
       }
     }
   },
@@ -118,6 +130,9 @@ export default {
       this.PlaceCreateForm._salesmanId = sales[0] && sales[0].id
       let agents = this.PlaceCreateForm.agents = await getAgents()
       this.PlaceCreateForm._agentId = agents[0] && agents[0].id
+      let grads = this.PlaceCreateForm.grads = await getAll()
+      console.log(grads)
+      this.PlaceCreateForm._gradId = grads[0].id
     },
 
     async submitForm (formName) {

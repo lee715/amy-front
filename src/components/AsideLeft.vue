@@ -12,7 +12,7 @@
       </template>
       <el-menu-item-group>
         <el-menu-item index="1-1" @click="goto('/places')">场地列表</el-menu-item>
-        <el-menu-item v-if="me.role === 'root'" index="1-2">创建场地</el-menu-item>
+        <el-menu-item :show="me.isRoot" index="1-2" @click="goto('/places/create')">创建场地</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="2">
@@ -22,7 +22,7 @@
       </template>
       <el-menu-item-group>
         <el-menu-item index="2-1">设备列表</el-menu-item>
-        <el-menu-item v-if="me.role === 'root'" index="2-2">创建设备</el-menu-item>
+        <el-menu-item v-show="me.role === 'root'" index="2-2" @click="goto('/devices/create')">创建设备</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="3">
@@ -55,7 +55,7 @@
 </style>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   data () {
@@ -69,6 +69,17 @@ export default {
   },
 
   methods: {
+    ...mapActions([
+      'getMe'
+    ]),
+    async initData () {
+      try {
+        await this.getMe()
+      } catch (e) {
+        console.log(e)
+        this.$router.push('/login')
+      }
+    },
     handleOpen (key, keyPath) {
       console.log(key, keyPath)
     },
@@ -79,8 +90,8 @@ export default {
       this.$router.push(path)
     }
   },
-
-  mounted: function () {
+  mounted: async function () {
+    await this.initData()
   }
 }
 </script>
